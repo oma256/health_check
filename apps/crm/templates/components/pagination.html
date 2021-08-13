@@ -1,0 +1,76 @@
+
+{#<div class="pagination">#}
+{#  <a href="#">&laquo;</a>#}
+{#  <a href="#" class="active">1</a>#}
+{#  <a href="#">2</a>#}
+{#  <a href="#">3</a>#}
+{#  <a href="#">4</a>#}
+{#  <a href="#">5</a>#}
+{#  <a href="#">6</a>#}
+{#  <a href="#">&raquo;</a>#}
+{#</div>#}
+
+
+{#<div class="pagination">#}
+{#    <a href="" class="active">1</a>#}
+{#    <a href="">2</a>#}
+{#    <a href="">3</a>#}
+{#    <a href="">4</a>#}
+{#    <a href="">...</a>#}
+{#</div>#}
+
+
+{% if is_paginated %}
+    {% load i18n %}
+    <ul class="pagination">
+        {% block previouslink %}
+            {% if page_obj.has_previous %}
+                {% if disable_link_for_first_page and page_obj.previous_page_number == 1 %}
+                    <a href="{{ request.path }}{% if getvars %}?{{ getvars|slice:"1:" }}{% endif %}" class="prev">
+                        &laquo;</a>
+                {% else %}
+                    <a href="?page{{ page_suffix }}={{ page_obj.previous_page_number }}{{ getvars }}" class="prev">
+                        &laquo;</a>
+                {% endif %}
+            {% else %}
+                {% if display_disabled_previous_link %}
+                    <span class="disabled prev">&laquo;</span>
+                {% endif %}
+            {% endif %}
+        {% endblock previouslink %}
+
+        {% block pagelinks %}
+            {% if display_page_links %}
+                {% for page in pages %}
+                    {% if page %}
+                        {% ifequal page page_obj.number %}
+                            <a href="?page{{ page_suffix }}={{ page }}{{ getvars }}" class="active"
+                                       class="page">{{ page }}</a>
+                        {% else %}
+                            {% if disable_link_for_first_page and page == 1 %}
+                                <a href="{{ request.path }}{% if getvars %}?{{ getvars|slice:"1:" }}{% endif %}"
+                                       class="page">{{ page }}</a>
+                            {% else %}
+                                <a href="?page{{ page_suffix }}={{ page }}{{ getvars }}"
+                                       class="page">{{ page }}</a>
+                            {% endif %}
+                        {% endifequal %}
+{#                    {% else %}#}
+{#                        ...#}
+                    {% endif %}
+                {% endfor %}
+            {% endif %}
+        {% endblock pagelinks %}
+
+        {% block nextlink %}
+            {% if page_obj.has_next %}
+                <a href="?page{{ page_suffix }}={{ page_obj.next_page_number }}{{ getvars }}" class="next">
+                    &raquo;</a>
+            {% else %}
+                {% if display_disabled_next_link %}
+                    <span class="disabled next">&raquo;</span>
+                {% endif %}
+            {% endif %}
+        {% endblock nextlink %}
+    </ul>
+{% endif %}

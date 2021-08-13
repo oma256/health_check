@@ -1,0 +1,31 @@
+{% load static %}
+
+<header>
+    <div class="container">
+        <div class="flex">
+            <div class="left-side">
+                <a href="{% url 'patient_list' %}">
+                    <img src="{% static 'image/svg/logo.svg' %}" alt="">
+                </a>
+            </div>
+            <div class="right-side">
+                <div class="user-avatar">
+                    <div class="text">
+                        <div class="gray-text">{{ request.user.get_type }}</div>
+                        <div class="black-text">{{ request.user.last_name }}</div>
+                    </div>
+                    {% if request.user.preview %}
+                        <div class="image">
+                            <img src="{{ request.user.preview.url }}" alt="">
+                        </div>
+                    {% else %}
+                        <div class="image">
+                            <img src="{% static 'image/svg/empty.svg' %}" alt="">
+                        </div>
+                    {% endif %}
+                </div>
+                <a href="{% url 'admin:logout' %}" class="exit">Выйти</a>
+            </div>
+        </div>
+    </div>
+</header>

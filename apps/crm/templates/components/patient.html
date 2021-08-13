@@ -1,0 +1,44 @@
+{% load static %}
+
+{% if patients %}
+    {% for patient in patients %}
+        <tr class="patient-list" data-href="{% url 'patient_detail' patient.pk %}">
+            <td>
+                <span>{{ patient.user.date_joined|date:'d m' }}</span>
+                <span>{{ patient.user.date_joined|date:'H:M' }}</span>
+            </td>
+            <td>
+                {{ patient.id }}
+            </td>
+            <td width="300">
+                <div class="flex">
+                    <div class="image">
+                        {% if patient.user.preview %}
+                            <img src="{{ patient.user.preview.url }}" alt="">
+                        {% else %}
+                            <img src="{% static 'image/svg/empty.svg' %}" alt="">
+                        {% endif %}
+                    </div>
+                    {{ patient.user.get_full_name }}
+                </div>
+            </td>
+            <td>
+                {{ patient.get_age }}
+            </td>
+            <td>
+                {{ patient.user.get_phone_formatted }}
+            </td>
+            <td width="227">
+                {{ patient.address }}
+            </td>
+            <td>
+                {% if patient.get_full_amount_deviations %}
+                    <div class="icon">{{ patient.get_full_amount_deviations }}</div>
+                {% else %}
+                    <span class="second">Отклонений нет</span>
+                {% endif %}
+            </td>
+        </tr>
+    {% endfor %}
+{% endif %}
+

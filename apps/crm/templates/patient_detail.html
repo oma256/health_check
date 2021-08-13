@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+    <div class="patient_detail_page">
+        <div class="content">
+            <div class="patient_profile_content">
+                <div class="profile_header">
+                    <img src="{% static 'images/png/Ellipse 6patient_big.png' %}" alt="">
+                    <div class="profile_header_text">
+                        <div class="profile_type">Пациент</div>
+                        <div class="profile_full_name">
+                            Пономарёв Жигер Платонович
+                        </div>
+                    </div>
+                </div>
+                <div class="profile_fields">
+                    <div class="profile_field_label">Фамилия</div>
+                    <div class="profile_filed">Пономарёв</div>
+                </div>
+                <div class="profile_fields">
+                    <div class="profile_field_label">Имя</div>
+                    <div class="profile_filed">Жигер</div>
+                </div>
+                <div class="profile_fields">
+                    <div class="profile_field_label">Отчество</div>
+                    <div class="profile_filed">Платонович</div>
+                </div>
+                <div class="profile_fields">
+                    <div class="profile_field_label">Год рождения</div>
+                    <div class="profile_filed">8 января, 1991г</div>
+                </div>
+                <div class="profile_fields">
+                    <div class="profile_field_label">Телефон</div>
+                    <div class="profile_filed">+996 (500) 400 500</div>
+                </div>
+                <div class="profile_fields">
+                    <div class="profile_field_label">Адрес</div>
+                    <div class="profile_filed">г.Бишкек, Киевская 145а</div>
+                </div>
+            </div>
+            <div class="patient_graphic">
+                <div class="patient_graphic_header">
+                    <div class="patient_graphic_title">
+                        График отклонений
+                    </div>
+                    <div class="patient_graphic_choice">
+
+                        За неделю
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

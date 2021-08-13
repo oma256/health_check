@@ -1,0 +1,186 @@
+{% extends 'profile-base.html' %}
+{% load static %}
+
+{% block content %}
+    <div class="user-page">
+        <div class="container">
+            <div class="flex">
+                <div class="left">
+                    <div class="top">
+                        {% if patient.user.preview %}
+                            <div class="image"><img src="{{ patient.user.preview.url }}" alt=""></div>
+                        {% else %}
+                            <div class="image"><img src="{% static 'image/svg/empty.svg' %}" alt=""></div>
+                        {% endif %}
+                        <div class="text">
+                            <div class="gray-text">Пациент</div>
+                            <div class="black-text">{{ patient.user.get_full_name }}</div>
+                        </div>
+                    </div>
+                    <div class="line"></div>
+                    <div class="middle">
+                        <div class="row">
+                            <div class="gray-text">Фамилия</div>
+                            <div class="black-text">{{ patient.user.last_name }}</div>
+                        </div>
+                        <div class="row">
+                            <div class="gray-text">Имя</div>
+                            <div class="black-text">{{ patient.user.first_name }}</div>
+                        </div>
+                        <div class="row">
+                            <div class="gray-text">Отчество</div>
+                            <div class="black-text">
+                                {% if patient.user.middle_name %}
+                                    {{ patient.user.middle_name }}
+                                {% else %} -
+                                {% endif %}
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="gray-text">Год рождения</div>
+                            <div class="black-text">{{ patient.date_of_birth }}</div>
+                        </div>
+                        <div class="row">
+                            <div class="gray-text">Телефон</div>
+                            <div class="black-text">{{ patient.user.get_phone_formatted }}</div>
+                        </div>
+                        <div class="row">
+                            <div class="gray-text">Адрес</div>
+                            <div class="black-text">{{ patient.address }}</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="right">
+                    <div class="flex">
+                        <div class="left-c">График отклонений</div>
+                        <div class="right-c">
+                            <form action="">
+                                <select name="" id="select-time">
+                                    <option value="1">{{ current_month }}</option>
+                                    <option value="2">3 месяца</option>
+                                    <option value="5">6 месяцев</option>
+                                    <option value="8">9 месяцев</option>
+                                    <option value="11">12 месяцев</option>
+                                </select>
+                            </form>
+                        </div>
+                    </div>
+                    <canvas id="myChart" height="200px"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block js %}
+    <script
+            src="https://code.jquery.com/jquery-2.2.4.js"
+            integrity="sha256-iT6Q9iMJYuQiMWNd9lDyBUStIq/8PuOW33aOqmvFpqI="
+            crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
+    <script>
+
+        let ctx = document.getElementById('myChart').getContext('2d');
+        let myChart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: {{ deviation_days }},
+                datasets: [{
+                    label: 'Кол-во отклонений',
+                    data: {{ deviation_counts }},
+                    backgroundColor: [
+                        'rgba(250, 68, 92, 0.2)',
+                        'rgba(250, 68, 92, 0.2)',
+                        'rgba(250, 68, 92, 0.2)',
+                        'rgba(250, 68, 92, 0.2)',
+                        'rgba(250, 68, 92, 0.2)',
+                        'rgba(250, 68, 92, 0.2)',
+                        'rgba(250, 68, 92, 0.2)'
+                    ],
+                    borderColor: [
+                        'rgba(250, 68, 92, 1)',
+                        'rgba(250, 68, 92, 1)',
+                        'rgba(250, 68, 92, 1)',
+                        'rgba(250, 68, 92, 1)',
+                        'rgba(250, 68, 92, 1)',
+                        'rgba(250, 68, 92, 1)',
+                        'rgba(250, 68, 92, 1)'
+                    ],
+                    borderWidth: 2,
+                }]
+            },
+            options: {
+                legend: {
+                    display: false,
+                },
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero: true,
+                            stepSize: 1,
+                        }
+                    }],
+                }
+            }
+        });
+
+        // filter on change event
+
+        $('#select-time').on('change', function () {
+            $.ajax({
+                url: '{% url 'deviation_list' %}',
+                method: 'GET',
+                data: {
+                    time: this.value,
+                    patient_id: {{ patient.id }},
+                },
+                dataType: 'json',
+                success: ({deviation_counts, deviation_days}) => {
+                    let ctx = document.getElementById('myChart').getContext('2d');
+                    let myChart = new Chart(ctx, {
+                        type: 'line',
+                        data: {
+                            labels: deviation_days,
+                            datasets: [{
+                                label: 'Кол-во отклонений',
+                                data: deviation_counts,
+                                backgroundColor: [
+                                    'rgba(250, 68, 92, 0.2)',
+                                    'rgba(250, 68, 92, 0.2)',
+                                    'rgba(250, 68, 92, 0.2)',
+                                    'rgba(250, 68, 92, 0.2)',
+                                    'rgba(250, 68, 92, 0.2)',
+                                    'rgba(250, 68, 92, 0.2)',
+                                    'rgba(250, 68, 92, 0.2)'
+                                ],
+                                borderColor: [
+                                    'rgba(250, 68, 92, 1)',
+                                    'rgba(250, 68, 92, 1)',
+                                    'rgba(250, 68, 92, 1)',
+                                    'rgba(250, 68, 92, 1)',
+                                    'rgba(250, 68, 92, 1)',
+                                    'rgba(250, 68, 92, 1)',
+                                    'rgba(250, 68, 92, 1)'
+                                ],
+                                borderWidth: 2,
+                            }]
+                        },
+                        options: {
+                            legend: {
+                                display: false,
+                            },
+                            scales: {
+                                yAxes: [{
+                                    ticks: {
+                                        beginAtZero: true,
+                                        stepSize: 1,
+                                    }
+                                }]
+                            }
+                        }
+                    });
+                }
+            })
+        });
+    </script>
+{% endblock %}

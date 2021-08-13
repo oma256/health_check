@@ -1,0 +1,477 @@
+* {
+    box-sizing: border-box;
+}
+
+
+@font-face {
+    font-family: geometria;
+    src: url(../fonts/gementria/Geometria.ttf);
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    background: #E6E6E6;
+    font-family: geometria;
+}
+
+.content {
+    margin: 0 10%;
+}
+
+/*@media (max-width: 1400px) {*/
+/*    .content {*/
+/*        margin: 0 10%;*/
+/*    }*/
+/*}*/
+/*@media (max-width: 800px) {*/
+/*    .content {*/
+/*        margin: 0;*/
+/*    }*/
+/*}*/
+
+/*@media screen and (max-width: 900px) and (min-width: 600px), (min-width: 1100px) {*/
+/*  .content {*/
+/*        margin: 0 285px;*/
+/*    }*/
+/*}*/
+
+/* START HEADER */
+header {
+    display: inline-block;
+    width: 100%;
+    left: 0;
+    top: 0;
+    background: #FFFFFF;
+}
+
+.logo {
+    display: inline-block;
+    float: left;
+    width: 150px;
+    margin: 40px 0;
+    overflow: hidden
+}
+
+.search {
+    float: left;
+    position: relative;
+    display: inline-block;
+    margin: 28px 0 28px 81px;
+    overflow: hidden
+}
+
+.search input {
+    padding: 16px 20px 16px 20px;
+    width: 315px;
+    height: 44px;
+    font-size: 12px;
+    background: #F8F8FB;
+    border: 1px solid #DADCE5;
+    border-radius: 60px;
+}
+
+.search img {
+    position: absolute;
+    width: 12px;
+    height: 12px;
+    top: 15.5px;
+    right: 22.5px;
+}
+
+
+.user_header {
+    margin: 30px 20px;
+    float: right;
+}
+
+.user_text {
+    margin: 0;
+    padding: 0;
+    display: inline-block;
+}
+
+.user_type {
+    padding: 0;
+    margin: 0;
+    font-size: 12px;
+    text-align: right;
+    color: #6A7083;
+}
+
+.user_name {
+    padding: 0;
+    margin: 0;
+    font-weight: 500;
+    font-size: 16px;
+    text-align: right;
+    line-height: 24px;
+    margin-top: 4px;
+}
+
+.user_header img {
+    display: inline-block;
+    width: 40px;
+    height: 40px;
+}
+
+.log_out {
+    margin: 30px 0;
+    float: right;
+
+    border: 1px solid #FA445C;
+    box-sizing: border-box;
+    border-radius: 50px;
+    text-align: center;
+    width: 100px;
+    height: 32px;
+    padding: 5px;
+    font-size: 12px;
+    color: #FA445C;
+    line-height: 20px;
+    text-decoration: none;
+    transition: background-color 0.5s;
+}
+
+.log_out:hover {
+    background-color: #FA445C;
+    color: #F8F8FB;
+}
+
+/* END HEADER */
+
+/* START TABLE */
+
+.patient_list {
+    margin: 10px 0;
+    padding: 0;
+}
+
+.patient_table {
+    border-collapse: collapse;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+.spacer {
+    height: 4px;
+}
+
+.table_header {
+    margin: 30px 0;
+}
+
+.table_header th {
+    height: 50px;
+    font-size: 14px;
+    line-height: 14px;
+    text-transform: uppercase;
+    color: #6A7083;
+    margin: 10px 0;
+}
+
+.table_item {
+    background: #FFFFFF;
+    font-size: 14px;
+    line-height: 20px;
+    color: #000000;
+    text-align: center;
+    transition: background-color 0.3s;
+}
+
+.table_item:hover {
+    cursor: pointer;
+    background: #f3f3f3;
+}
+
+.table_item td {
+    padding: 20px 0;
+    /*border: 1px solid #FFFFFF;*/
+}
+
+.table_item td:first-child {
+    border-bottom-left-radius: 8px;
+    border-top-left-radius: 8px;
+}
+
+.table_item td:last-child {
+    border-bottom-right-radius: 8px;
+    border-top-right-radius: 8px;
+}
+
+.item_date {
+    padding: 0 0 0 20px;
+    text-align: left;
+    font-size: 12px;
+    color: #6A7083;
+}
+
+.item_time {
+    padding: 0 0 0 20px;
+    text-align: left;
+    font-size: 12px;
+    line-height: 12px;
+    color: #6A7083;
+}
+
+.item_id {
+    font-size: 14px;
+    line-height: 20px;
+    color: #000000;
+}
+
+.item_detail {
+    text-align: center;
+    align-items: center;
+}
+
+.item_detail img {
+    margin: auto;
+    display: inline-block;
+    width: 40px;
+    height: 40px;
+    background-blend-mode: normal;
+    border-radius: 50%;
+}
+
+.item_detail p {
+    margin: 0;
+    display: inline-block;
+}
+
+.item_deviation_number {
+    padding: 10px;
+    margin: auto;
+    width: 36px;
+    height: 36px;
+    text-align: center;
+    background: #FA445C;
+    font-weight: 800;
+    font-size: 16px;
+    line-height: 20px;
+    color: #FFFFFF;
+    border-radius: 50%;
+}
+
+.item_deviation_text {
+    font-size: 14px;
+    line-height: 20px;
+    color: #A6ACBE;
+}
+
+/* END  TABLE */
+
+
+/* START  PAGINATION */
+
+.pagination {
+    display: inline-block;
+    margin-top: 32px;
+    padding: 0;
+}
+
+.pagination a {
+    float: left;
+    padding-top: 9px;
+    width: 32px;
+    height: 32px;
+    display: inline-block;
+    text-align: center;
+    background: #E6E6E6;
+    color: #2D3436;
+    font-size: 14px;
+    text-decoration: none;
+
+}
+
+.pagination a:hover {
+    background: #24AF47;
+    color: #FFFFFF;
+}
+
+.pagination .active {
+    background: #24AF47;
+    color: #FFFFFF;
+}
+
+/* END  PAGINATION */
+
+/* START  PATIENT DETAIL PAGE */
+.patient_detail_page {
+    margin-top: 40px;
+    height: 100vh;
+}
+
+.patient_profile_content {
+    float: left;
+    background: #FFFFFF;
+    border-radius: 16px;
+    width: 30%;
+    padding: 0;
+}
+
+.profile_header {
+    padding: 30px;
+    border-bottom: 1px solid #EEF0F6;
+}
+
+.profile_header img {
+    display: inline-block;
+    width: 74px;
+    height: 74px;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+.profile_header_text {
+    display: inline-block;
+}
+
+.profile_type {
+    font-size: 15px;
+    line-height: 22px;
+    color: #A6ACBE;
+}
+
+.profile_full_name {
+    width: 250px;
+    overflow: hidden;
+    font-weight: bold;
+    font-size: 18px;
+    line-height: 26px;
+    color: #000000;
+}
+
+.profile_fields {
+    padding: 30px 0 0 30px;
+}
+
+.profile_fields:last-child {
+    padding: 30px 0 30px 30px;
+}
+
+.profile_field_label {
+    font-size: 12px;
+    line-height: 12px;
+    color: #A6ACBE;
+}
+
+.profile_filed {
+    font-weight: 500;
+    font-size: 15px;
+    line-height: 22px;
+    color: #000000;
+}
+
+
+.patient_graphic {
+    margin: auto;
+    padding: 0;
+    float: right;
+    width: 65%;
+    height: 500px;
+    background: #FFFFFF;
+    border-radius: 16px;
+}
+
+.patient_graphic_title {
+    margin: 40px 30px;
+    float: left;
+    font-weight: bold;
+    font-size: 22px;
+    line-height: 20px;
+    display: flex;
+    align-items: flex-end;
+    color: #2D3436;
+    width: 230px;
+}
+
+.patient_graphic_choice {
+    float: right;
+    margin: 30px 30px;
+    width: 200px;
+    height: 44px;
+    position: relative;
+}
+
+.patient_graphic_choice select {
+    display: none;
+}
+
+
+.select-selected {
+    position: relative;
+    background: #FFFFFF;
+    border: 1px solid #DADCE5;
+    box-sizing: border-box;
+    border-radius: 50px;
+}
+
+/*style the arrow inside the select element:*/
+.select-selected:after {
+    position: absolute;
+    content: "";
+    top: 14px;
+    right: 10px;
+    width: 0;
+    height: 0;
+    border: 6px solid transparent;
+    border-color: #A6ACBE transparent transparent transparent;
+}
+
+/*point the arrow upwards when the select box is open (active):*/
+.select-selected.select-arrow-active:after {
+    border-color: transparent transparent #A6ACBE transparent;
+    top: 7px;
+}
+
+/*style the items (options), including the selected item:*/
+.select-items div, .select-selected {
+    padding: 8px 16px;
+    cursor: pointer;
+    user-select: none;
+    background: #FFFFFF;
+    border: 1px solid #DADCE5;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 20px;
+    color: #2D3436;
+}
+
+/*style items (options):*/
+.select-items {
+    position: absolute;
+    background-color: #FFFFFF;
+    top: 100%;
+    left: 0;
+    right: 0;
+    z-index: 99;
+}
+
+.select-selected img {
+    width: 24px;
+    height: 24px;
+}
+
+/*hide the items when the select box is closed:*/
+.select-hide {
+    display: none;
+}
+
+.select-items div:hover, .same-as-selected {
+    background-color: rgba(0, 0, 0, 0.1);
+}
+
+@media (max-width: 800px) {
+    .patient_profile_content, .patient_graphic {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+}
+
+.patient-list {
+    cursor: pointer;
+}
+
+/* END  PATIENT DETAIL PAGE */

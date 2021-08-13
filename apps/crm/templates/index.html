@@ -1,0 +1,69 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load pagination_tags %}
+
+{% block content %}
+
+    <div class="table-info">
+        <div class="container">
+            <table border="0">
+                <thead>
+                <tr>
+                    <th>ДАТА</th>
+                    <th>ID</th>
+                    <th>ПАЦИЕНТ</th>
+                    <th>Возраст</th>
+                    <th>Телефон</th>
+                    <th>Адрес</th>
+                    <th>Отклонений</th>
+                </tr>
+                </thead>
+                <tbody id="patients-tbody">
+                    {% autopaginate object_list 10 10 as patients %}
+                    {% include 'components/patient.html' %}
+                </tbody>
+            </table>
+            {% paginate using 'components/pagination.html' %}
+        </div>
+    </div>
+{% endblock %}
+
+{% block js %}
+    <script>
+        function get_data_href() {
+            $('tbody>tr').click(function (e) {
+                e.preventDefault();
+                window.location = $(this).data('href');
+            });
+        }
+
+        window.onload = get_data_href();
+
+        const patientSearchAjaxQueryEndpoint = '{% url "patient_search_ajax_query" %}';
+        const patient_input = $("#patient-data-input");
+        const patients_tbody = $('#patients-tbody');
+        const delay_by_in_ms = 700;
+        let scheduled_function = false;
+
+        let ajax_call = function (endpoint, request_parameters) {
+            $.getJSON(endpoint, request_parameters).done(response => {
+                patients_tbody.fadeTo('fast', 0).promise().then(() => {
+                    patients_tbody.html(response['html_from_view']);
+                    patients_tbody.fadeTo('fast', 1);
+                    get_data_href();
+                });
+            })
+        };
+
+        patient_input.on('keyup', function () {
+            const request_parameters = {
+                patient_data: $(this).val()
+            };
+            if (scheduled_function) {
+                clearTimeout(scheduled_function)
+            }
+
+            scheduled_function = setTimeout(ajax_call, delay_by_in_ms, patientSearchAjaxQueryEndpoint, request_parameters)
+        })
+    </script>
+{% endblock %}

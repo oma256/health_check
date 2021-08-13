@@ -1,0 +1,89 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+    <div class="patient_list">
+        <div class="content">
+            <table class="patient_table">
+                <tr class="table_header">
+                    <th>ДАТА</th>
+                    <th>ID</th>
+                    <th>ПАЦИЕНТ</th>
+                    <th>Возраст</th>
+                    <th>Телефон</th>
+                    <th>Адрес</th>
+                    <th>Отклонений</th>
+                </tr>
+
+                <tr class="table_item" data-hred="#">
+                    <td>
+                        <div class="item_date">15 дек</div>
+                        <div class="item_time">9:20</div>
+                    </td>
+                    <td>
+                        <div class="item_id">#3131</div>
+                    </td>
+                    <td>
+                        <div class="item_detail">
+                            <img src="{% static 'images/png/w_sexy_gr 1patient_little.png' %}" alt="">
+                            <p>Пономарёв Жигер Платонович</p>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="item_age">54</div>
+                    </td>
+                    <td>
+                        <div class="item_phone">+996 (500) 400 500</div>
+                    </td>
+                    <td>
+                        <div class="item_address">г.Бишкек, Киевская 145а</div>
+                    </td>
+                    <td>
+                        <div class="item_deviation_number">5</div>
+                    </td>
+                </tr>
+                <tr class="spacer"></tr>
+
+                <tr class="table_item" data-hred="#">
+                    <td>
+                        <div class="item_date">15 дек</div>
+                        <div class="item_time">9:20</div>
+                    </td>
+                    <td>
+                        <div class="item_id">#3131</div>
+                    </td>
+                    <td>
+                        <div class="item_detail">
+                            <img src="{% static 'images/png/w_sexy_gr 1patient_little.png' %}" alt="">
+                            <p>Пономарёв Жигер Платонович</p>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="item_age">54</div>
+                    </td>
+                    <td>
+                        <div class="item_phone">+996 (500) 400 500</div>
+                    </td>
+                    <td>
+                        <div class="item_address">г.Бишкек, Киевская 145а</div>
+                    </td>
+                    <td>
+                        <div class="item_deviation_text">Отклонений нет</div>
+                    </td>
+                </tr>
+            </table>
+
+            {% include 'components/pagination.html' %}
+        </div>
+    </div>
+{% endblock %}
+
+{% block js %}
+    <script>
+        jQuery(document).ready(function($) {
+            $(".table_item").click(function() {
+                window.location = $(this).data("href");
+            });
+        });
+    </script>
+{% endblock %}

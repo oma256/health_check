@@ -1,0 +1,9 @@
+{% extends "admin/index.html" %}
+{% load static %}
+
+{% block content %}
+<div id="content-main">
+<a href="{% url 'patient_list' %}" class="button" style="cursor:pointer; font-size: 25px">Мониторинг</a>
+{{ block.super }}
+</div>
+{% endblock %}
